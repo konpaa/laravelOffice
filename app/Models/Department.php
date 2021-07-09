@@ -9,8 +9,8 @@ class Department extends Model
 {
     use HasFactory;
 
-    public function employees()
+    public function staff()
     {
-        $this->morphToMany(Staff::class, 'working');
+        $this->hasMany(Staff::class);
     }
 }
