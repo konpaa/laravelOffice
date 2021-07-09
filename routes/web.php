@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'home'])
     ->name('home');
+
+Route::get('department/create', [DepartmentController::class, 'create'])
+    ->name('department.create');
+
+Route::post('departments', [DepartmentController::class, 'store'])
+    ->name('department.store');
+
+Route::get('employees/create', [EmployeesController::class, 'create'])
+    ->name('employees.create');
+
+Route::post('employees', [EmployeesController::class, 'store'])
+    ->name('employees.store');

@@ -3,12 +3,16 @@
 @section('content')
 
 <h1>Hello</h1>
+<a href="{{route('department.create')}}">Create department</a>
+<a href="{{route('employees.create')}}">Create staff</a>
+<br>
 <table class="table">
     <thead>
     <tr>
         <th class="col">#</th>
         @foreach ($departments as $department)
             <th class="col">{{$department->name}}</th>
+        @endforeach
     </tr>
     </thead>
     <tbody>
@@ -18,6 +22,5 @@
     </tr>
     @endforeach
     </tbody>
-@endforeach
 </table>
 @endsection

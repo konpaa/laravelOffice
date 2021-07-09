@@ -9,6 +9,8 @@ class Staff extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['firstName', 'lastName', 'patronymic', 'gender', 'wage', 'department_id'];
+
     public function departments()
     {
         $this->belongsTo(Department::class);
