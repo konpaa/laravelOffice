@@ -21,7 +21,7 @@
 
 @foreach($departments as $department)
     {{ Form::label('department_id', $department->name) }}
-{{ Form::radio('department_id', $department->id)}}<br>
+{{ Form::checkbox('department_id[]', $department->id)}}<br>
 @endforeach
 {{ Form::submit('Создать') }}
 {{ Form::close() }}

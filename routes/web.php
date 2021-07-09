@@ -30,3 +30,6 @@ Route::get('employees/create', [EmployeesController::class, 'create'])
 
 Route::post('employees', [EmployeesController::class, 'store'])
     ->name('employees.store');
+
+Route::get('employees/show', [EmployeesController::class, 'show'])
+    ->name('employees.show');

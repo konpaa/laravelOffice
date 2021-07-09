@@ -25,6 +25,10 @@ class EmployeesController extends Controller
         $data = $this->validate($request, [
             'firstName' => 'required:staff',
             'lastName' => 'required:staff',
+            'patronymic' => '',
+            'gender' => '',
+            'wage' => '',
+            'department_id' => 'required:staff'
         ]);
 
         $employees = new Staff();
@@ -32,7 +36,19 @@ class EmployeesController extends Controller
 
         $employees->save();
 
+        $departmentsId = $request->input('department_id');
+        foreach ($departmentsId as $id) {
+            $departments = Department::all()->where('id', $id);
+            $employees->departments()->attach($departments);
+        }
+
         return redirect()
             ->route('home');
+    }
+
+    public function show()
+    {
+        $employees = Staff::all();
+        return view('employees.show', compact('employees'));
     }
 }
