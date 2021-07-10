@@ -61,8 +61,7 @@ class StaffController extends Controller
 
         $departmentsId = $request->input('department_id');
         foreach ($departmentsId as $id) {
-            $departments = Department::find($id);
-            $staff->departments()->attach($departments);
+            $staff->departments()->attach($id);
 
             $numberOfEmployees = $this->addNewNumberOfEmployeesDepartments($id);
 
@@ -95,6 +94,13 @@ class StaffController extends Controller
     public function edit(Staff $staff): View
     {
         $departments = Department::all();
+//        $dep = $staff->departments();
+//        $notChecked = [];
+//        foreach ($departments as $item) {
+//            if ($dep->where('id', $item->id) != null) {
+//                array_push($notChecked, $item);
+//            }
+//        }
 
         return view('staff.edit', [
             'staff' => $staff,
@@ -123,10 +129,19 @@ class StaffController extends Controller
         $staff->fill($data);
         $staff->save();
 
-        $departmentsId = $request->input('department_id');
+        $departmentsId = $request->department_id;
         foreach ($departmentsId as $id) {
-            $departments = Department::all()->where('id', $id);
-            $staff->departments()->attach($departments);
+            if ($staff->departments()->find($id)) {
+                continue;
+            }
+            $staff->departments()->attach($id);
+        }
+
+        $dep = DB::table('departments')
+            ->whereNotIn('id', $departmentsId)
+            ->get();
+        foreach ($dep as $item) {
+            $staff->departments()->detach($item->id);
         }
 
         return redirect()

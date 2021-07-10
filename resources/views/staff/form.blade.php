@@ -19,7 +19,30 @@
 {{ Form::label('wage', 'wage') }}
 {{ Form::number('wage') }}<br>
 
-@foreach($departments as $department)
-    {{ Form::label('department_id', $department->name) }}
-    {{ Form::checkbox('department_id[]', $department->id)}}<br>
-@endforeach
+@if(count($staff->departments) > 0)
+
+    @foreach($departments as $department)
+
+    @endforeach
+    @foreach($staff->departments as $department)
+        {{ Form::label('department_id', $department->name) }}
+        {{ Form::checkbox('department_id[]', $department->id, true)}}<br>
+    @endforeach
+    <br>
+    <br>
+    {{ Form::label('Взможные', "Возможные:") }}
+    @foreach($departments as $department)
+        {{ Form::label('department_id', $department->name) }}
+        {{ Form::checkbox('department_id[]', $department->id)}}<br>
+    @endforeach
+{{--    @foreach($departments as $department)--}}
+{{--        @continue(in_array($staff->$departments, $department))--}}
+{{--        {{ Form::label('department_id', $department->name) }}--}}
+{{--        {{ Form::checkbox('department_id[]', $department->id)}}<br>--}}
+{{--    @endforeach--}}
+@else
+    @foreach($departments as $department)
+        {{ Form::label('department_id', $department->name) }}
+        {{ Form::checkbox('department_id[]', $department->id)}}<br>
+    @endforeach
+@endif
