@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class DepartmentsController extends Controller
@@ -20,6 +21,14 @@ class DepartmentsController extends Controller
     public function index(): View
     {
         $departments = Department::all();
+        foreach ($departments as $department) {
+            $max = DB::table('staff')
+                ->join('department_staff', 'staff.id', '=', 'department_staff.staff_id')
+                ->select('staff.wage', 'department_staff.department_id')
+                ->where('department_staff.department_id', '=', $department->id)
+                ->max('staff.wage');
+            $department->maxWage = $max;
+        }
 
         return view('department.index', compact('departments'));
     }
@@ -109,7 +118,7 @@ class DepartmentsController extends Controller
      */
     public function destroy(Department $department): RedirectResponse
     {
-        if ($department && count($department->staff()) < 1) {
+        if ($department && $department->staff()->count() == 0) {
             $department->delete();
         }
 

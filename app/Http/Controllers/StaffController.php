@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class StaffController extends Controller
@@ -60,8 +61,14 @@ class StaffController extends Controller
 
         $departmentsId = $request->input('department_id');
         foreach ($departmentsId as $id) {
-            $departments = Department::all()->where('id', $id);
+            $departments = Department::find($id);
             $staff->departments()->attach($departments);
+
+            $numberOfEmployees = $this->addNewNumberOfEmployeesDepartments($id);
+
+            DB::table('departments')
+                ->where('id', $id)
+                ->update(['numberOfEmployees' => $numberOfEmployees]);
         }
 
         return redirect()
@@ -91,8 +98,7 @@ class StaffController extends Controller
 
         return view('staff.edit', [
             'staff' => $staff,
-            'departments' => $departments,
-            'id' => $staff->id
+            'departments' => $departments
         ]);
     }
 
@@ -136,11 +142,32 @@ class StaffController extends Controller
     public function destroy(Staff $staff): RedirectResponse
     {
         if ($staff) {
+            $idDepartments = DB::table('staff')
+                ->join('department_staff', 'staff.id', '=', 'department_staff.staff_id')
+                ->select('department_staff.department_id')
+                ->where('staff.id', '=', $staff->id)
+                ->get();
+            foreach ($idDepartments as $idDepartment) {
+                $count = $this->addNewNumberOfEmployeesDepartments((array) $idDepartment);
+                $count--;
+                DB::table('departments')
+                    ->where('id', (array) $idDepartment)
+                    ->update(['numberOfEmployees' => $count]);
+            }
             $staff->departments()->detach();
             $staff->delete();
         }
 
         return redirect()
             ->route('home');
+    }
+
+    public function addNewNumberOfEmployeesDepartments($id): int
+    {
+        return DB::table('departments')
+            ->join('department_staff', 'departments.id', '=', 'department_staff.department_id')
+            ->select('department_staff.staff_id')
+            ->where('departments.id', '=', $id)
+            ->count();
     }
 }
