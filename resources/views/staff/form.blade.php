@@ -7,7 +7,6 @@
         </ul>
     </div>
 @endif
-{{ Form::model($employees, ['url' => route('employees.store')]) }}
 {{ Form::label('firstName', 'firstName') }}
 {{ Form::text('firstName') }}<br>
 {{ Form::label('lastName', 'lastName') }}
@@ -21,7 +20,5 @@
 
 @foreach($departments as $department)
     {{ Form::label('department_id', $department->name) }}
-{{ Form::checkbox('department_id[]', $department->id)}}<br>
+    {{ Form::checkbox('department_id[]', $department->id)}}<br>
 @endforeach
-{{ Form::submit('Создать') }}
-{{ Form::close() }}

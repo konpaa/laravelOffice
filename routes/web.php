@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DepartmentController;
 
@@ -25,11 +25,4 @@ Route::get('department/create', [DepartmentController::class, 'create'])
 Route::post('departments', [DepartmentController::class, 'store'])
     ->name('department.store');
 
-Route::get('employees/create', [EmployeesController::class, 'create'])
-    ->name('employees.create');
-
-Route::post('employees', [EmployeesController::class, 'store'])
-    ->name('employees.store');
-
-Route::get('employees/show', [EmployeesController::class, 'show'])
-    ->name('employees.show');
+Route::resource('staff', StaffController::class);

@@ -4,8 +4,8 @@
 
 <h1>Hello</h1>
 <a href="{{route('department.create')}}">Create department</a>
-<a href="{{route('employees.create')}}">Create staff</a>
-<a href="{{route('employees.show')}}">Show staff</a>
+<a href="{{route('staff.create')}}">Create staff</a>
+<a href="{{route('staff.index')}}">Show staff</a>
 <br>
 <table class="table">
     <thead>
