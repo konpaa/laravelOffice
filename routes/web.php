@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +19,6 @@ use App\Http\Controllers\DepartmentController;
 Route::get('/', [PageController::class, 'home'])
     ->name('home');
 
-Route::get('department/create', [DepartmentController::class, 'create'])
-    ->name('department.create');
-
-Route::post('departments', [DepartmentController::class, 'store'])
-    ->name('department.store');
+Route::resource('departments', DepartmentsController::class);
 
 Route::resource('staff', StaffController::class);

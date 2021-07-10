@@ -17,7 +17,7 @@ class Department extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'numberOfEmployees', 'maxWage'];
 
     /**
      * @return BelongsToMany
