@@ -6,5 +6,4 @@
 @include('staff.form')
 {{ Form::submit('Обновить') }}
 {{ Form::close() }}
-
 @endsection

@@ -1,6 +1,4 @@
-@extends('layouts.app')
 
-@section('content')
 @if ($errors->any())
     <div>
         <ul>
@@ -19,10 +17,9 @@
 {{ Form::label('gender', 'gender') }}
 {{ Form::select('gender', array('M' => 'Male', 'F' => 'Flame')) }}<br>
 {{ Form::label('wage', 'wage') }}
-{{ Form::number('wage', 400) }}<br>
+{{ Form::number('wage') }}<br>
 
 @foreach($departments as $department)
     {{ Form::label('department_id', $department->name) }}
     {{ Form::checkbox('department_id[]', $department->id)}}<br>
 @endforeach
-@endsection

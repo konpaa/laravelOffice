@@ -6,4 +6,5 @@
 @include('staff.form')
 {{ Form::submit('Создать') }}
 {{ Form::close() }}
+
 @endsection

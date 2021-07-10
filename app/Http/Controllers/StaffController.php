@@ -33,8 +33,8 @@ class StaffController extends Controller
     public function create(): View
     {
         $staff = new Staff();
-//        $departments = Department::all();
-        return view('staff.create', compact('staff'));
+        $departments = Department::all();
+        return view('staff.create', compact('staff'), compact('departments'));
     }
 
     /**

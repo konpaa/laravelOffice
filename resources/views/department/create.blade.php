@@ -10,7 +10,7 @@
         </ul>
     </div>
 @endif
-{{ Form::model($department, ['url' => route('department.store')]) }}
+{{ Form::model($department, ['url' => route('departments.store')]) }}
 {{ Form::label('name', 'Название') }}
 {{ Form::text('name') }}<br>
 {{ Form::submit('Создать') }}

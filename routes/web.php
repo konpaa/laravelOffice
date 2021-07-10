@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [PageController::class, 'home'])
     ->name('home');
+
+Route::get('json', [PageController::class, 'jsonResponse'])
+    ->name('jsonResponse');
 
 Route::resource('departments', DepartmentsController::class);
 
 Route::resource('staff', StaffController::class);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
