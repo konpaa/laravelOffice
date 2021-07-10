@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{ Form::model($department, ['url' => route('departments.update', $department), 'method' => 'PATCH']) }}
+
 @if ($errors->any())
     <div>
         <ul>
@@ -12,9 +12,9 @@
         </ul>
     </div>
 @endif
-{{ Form::model($department, ['url' => route('departments.store')]) }}
+{{ Form::model($department, ['url' => route('departments.update', $department), 'method' => 'PATCH']) }}
 {{ Form::label('name', 'Название') }}
 {{ Form::text('name') }}<br>
-{{ Form::submit('Обновить') }}
+{{ Form::submit('Обновить', ['class' => 'btn btn-lg btn-primary ms-md-3 px-5 text-uppercase'])}}
 {{ Form::close() }}
 @endsection

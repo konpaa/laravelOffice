@@ -10005,3 +10005,10 @@ h3 {
 .mark {
   color: green;
 }
+
+form {
+  margin-right: auto;
+  margin-left: auto;
+  top: 20%;
+  width: 200px;
+}

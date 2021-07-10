@@ -10,9 +10,10 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
+@include('layouts.navbar')
 <div class="container mt-4">
     <h1>@yield('header')</h1>
-    <div>
+    <div class="content">
         @yield('content')
     </div>
 </div>
