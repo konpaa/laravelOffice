@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 {{ Form::model($department, ['url' => route('departments.update', $department), 'method' => 'PATCH']) }}
 @if ($errors->any())
     <div>
@@ -13,3 +17,4 @@
 {{ Form::text('name') }}<br>
 {{ Form::submit('Обновить') }}
 {{ Form::close() }}
+@endsection

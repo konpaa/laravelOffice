@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 @if ($errors->any())
     <div>
         <ul>
@@ -22,3 +25,4 @@
     {{ Form::label('department_id', $department->name) }}
     {{ Form::checkbox('department_id[]', $department->id)}}<br>
 @endforeach
+@endsection
