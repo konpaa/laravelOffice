@@ -13,6 +13,18 @@ use Illuminate\Validation\ValidationException;
 
 class DepartmentsController extends Controller
 {
+    private StaffController $staffController;
+
+    /**
+     * DepartmentsController constructor.
+     * @param StaffController $staffController
+     */
+    public function __construct(StaffController $staffController)
+    {
+        $this->staffController = $staffController;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +40,8 @@ class DepartmentsController extends Controller
                 ->where('department_staff.department_id', '=', $department->id)
                 ->max('staff.wage');
             $department->maxWage = $max;
+            $department->numberOfEmployees = $this->staffController
+                ->addNewNumberOfEmployeesDepartments($department->id);
         }
 
         return view('department.index', compact('departments'));

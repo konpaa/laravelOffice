@@ -7,8 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
             <li><a class="nav-item nav-link" href="{{ route('staff.create') }}">Created staff</a></li>
-            <li><a class="nav-item nav-link" href="{{ route('staff.index') }}">Show index</a></li>
-            <li><a class="nav-item nav-link" href="{{ route('departments.index') }}">Show department</a></li>
+            <li><a class="nav-item nav-link" href="{{ route('staff.index') }}">Show staff</a></li>
+            <li><a class="nav-item nav-link" href="{{ route('departments.index') }}">Show departments</a></li>
             <li><a class="nav-item nav-link" href="{{ route('departments.create') }}">Created department</a></li>
         </ul>
     </div>
