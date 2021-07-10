@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    updateStaff
+@endsection
 @section('content')
 
 {{ Form::model($staff, ['url' => route('staff.update', $staff), 'method' => 'PATCH', 'class' => 'd-flex justify-content-center flex-column']) }}

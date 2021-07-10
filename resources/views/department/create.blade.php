@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    crateDepartments
+@endsection
 @section('content')
 @if ($errors->any())
     <div>

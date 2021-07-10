@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    createStaff
+@endsection
 @section('content')
 {{ Form::model($staff, ['url' => route('staff.store'), 'class' => 'd-flex justify-content-center flex-column']) }}
 @include('staff.form')

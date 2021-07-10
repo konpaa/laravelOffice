@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+    showDepartments
+@endsection
 @section('content')
 
 <table class="table">

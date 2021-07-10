@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title')
+    home
+@endsection
 @section('content')
 <table class="table">
     <thead>
