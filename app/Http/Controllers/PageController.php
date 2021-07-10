@@ -10,7 +10,7 @@ class PageController extends Controller
     public function home()
     {
         $departments = Department::all();
-        $employees = Staff::all();
-        return view('page.home', compact('departments'), compact('employees'));
+        $staff = Staff::all();
+        return view('page.home', compact('departments'), compact('staff'));
     }
 }

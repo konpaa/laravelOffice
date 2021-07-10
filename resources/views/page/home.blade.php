@@ -17,9 +17,9 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($employees as $employee)
+    @foreach($staff as $person)
     <tr>
-        <th scope="row">{{$employee->firstName . $employee->lastName}}</th>
+        <th scope="row">{{$person->firstName . $person->lastName}}</th>
     </tr>
     @endforeach
     </tbody>

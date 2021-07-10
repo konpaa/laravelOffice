@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <table class="table">
     <thead>
     <tr>
@@ -13,13 +17,13 @@
         <th scope="row">{{$department->numberOfEmployees}}</th>
         <th scope="row">{{$department->maxWage}}</th>
 
-            @if(count($department->staff) > 0)
-        <th>
-            @foreach($department->staff as $person)
-                /{{$person->firstName}} {{$person->lastName}}/
-            @endforeach
-        </th>
-            @endif
+{{--            @if(count($department->staff) > 0)--}}
+{{--        <th>--}}
+{{--            @foreach($department->staff as $person)--}}
+{{--                /{{$person->firstName}} {{$person->lastName}}/--}}
+{{--            @endforeach--}}
+{{--        </th>--}}
+{{--            @endif--}}
         <th>
             <a href="{{route('departments.edit', $department)}}">Update</a>
         </th>
@@ -36,3 +40,4 @@
     @endforeach
     </tbody>
 </table>
+@endsection

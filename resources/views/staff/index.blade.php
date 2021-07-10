@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('content')
+
 <table class="table">
 <thead>
 <tr>
@@ -6,7 +10,7 @@
     <th class="col">Patronymic</th>
     <th class="col">Gender</th>
     <th class="col">Wage</th>
-    <th class="col">Departments</th>
+{{--    <th class="col">Departments</th>--}}
 </tr>
 </thead>
     <tbody>
@@ -16,11 +20,11 @@
         <th scope="row">{{$person->patronymic}}</th>
         <th scope="row">{{$person->gender}}</th>
         <th scope="row">{{$person->wage}}</th>
-        <th scope="row">
-        @foreach($person->departments as $department)
-        {{$department->name}}
-        @endforeach
-        </th>
+{{--        <th scope="row">--}}
+{{--        @foreach($person->departments as $department)--}}
+{{--        {{$department->name}}--}}
+{{--        @endforeach--}}
+{{--        </th>--}}
         <th>
             <a href="{{route('staff.edit', $person)}}">Update</a>
         </th>
@@ -37,3 +41,5 @@
     @endforeach
     </tbody>
 </table>
+@endsection
+
