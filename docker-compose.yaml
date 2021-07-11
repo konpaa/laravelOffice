@@ -3,9 +3,21 @@ version: '3'
 services:
   database:
     image: postgres:13-alpine
+    volumes:
+      - ./office_data:/var/www/html
     environment:
       POSTGRES_USER: main
       POSTGRES_PASSWORD: main
       POSTGRES_DB: main
     ports:
       - 5433:5432
+
+  database_testing:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    ports:
+      - 5435:5434
+

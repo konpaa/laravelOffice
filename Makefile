@@ -4,6 +4,8 @@ start:
 setup:
 	composer install
 	cp -n .env.example .env || true
+	touch .env.testing
+	cp -n .env .env.testing
 	php artisan key:gen --ansi
 	php artisan key:generate --env=testing
 	docker-compose up -d
@@ -30,3 +32,6 @@ deploy:
 
 lint:
 	composer phpcs
+
+route:
+	php artisan route:list

@@ -91,6 +91,25 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'pgsql_test' => [
+            'driver' => 'pgsql',
+            'url' => 'postgres://test:test@localhost/test',
+            'host' => '127.0.0.1',
+            'port' => '5435',
+            'database' => 'test',
+            'username' => 'test',
+            'password' => 'test',
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+        ],
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ],
     ],
 
     /*
