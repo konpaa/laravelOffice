@@ -16,9 +16,9 @@
     <tbody>
     @foreach($staff as $person)
     <tr>
-        <th scope="row" id="{{$person->id}}}}">{{$person->firstName . $person->lastName}}</th>
+        <th scope="row" id="{{$person->id}}}}">{{$person->firstName . "  ".$person->lastName}}</th>
         @foreach ($departments as $department)
-            <td id="{{$department->id.$person->id}}"></td>
+            <td id="{{$department->id . $person->id}}"></td>
         @endforeach
     </tr>
     @endforeach
