@@ -1,5 +1,4 @@
 start:
-	docker-compose up -d
 	php artisan serve --host 0.0.0.0
 
 setup:
@@ -7,7 +6,7 @@ setup:
 	cp -n .env.example .env || true
 	php artisan key:gen --ansi
 	php artisan key:generate --env=testing
-	touch database/database.sqlite || true
+	docker-compose up -d
 	php artisan migrate
 	npm install
 
