@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepartmentPostRequest;
 use App\Models\Department;
+use App\Repositories\Interfaces\DepartmentsRepositoryInterface;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 
 class DepartmentsController extends Controller
 {
-    private StaffController $staffController;
+
+    private DepartmentsRepositoryInterface $departmentsRepository;
 
     /**
      * DepartmentsController constructor.
-     * @param StaffController $staffController
+     * @param DepartmentsRepositoryInterface $departmentsRepository
      */
-    public function __construct(StaffController $staffController)
+    public function __construct(DepartmentsRepositoryInterface $departmentsRepository)
     {
-        $this->staffController = $staffController;
+        $this->departmentsRepository = $departmentsRepository;
     }
 
 
@@ -32,19 +32,7 @@ class DepartmentsController extends Controller
      */
     public function index(): View
     {
-        $departments = Department::all();
-        foreach ($departments as $department) {
-            $max = DB::table('staff')
-                ->join('department_staff', 'staff.id', '=', 'department_staff.staff_id')
-                ->select('staff.wage', 'department_staff.department_id')
-                ->where('department_staff.department_id', '=', $department->id)
-                ->max('staff.wage');
-            $department->maxWage = $max;
-            $department->numberOfEmployees = $this->staffController
-                ->addNewNumberOfEmployeesDepartments($department->id);
-        }
-
-        return view('department.index', compact('departments'));
+        return view('department.index', ['departments' => $this->departmentsRepository->all()]);
     }
 
     /**
@@ -54,27 +42,18 @@ class DepartmentsController extends Controller
      */
     public function create(): View
     {
-        $department = new Department();
-        return view('department.create', compact('department'));
+        return view('department.create', ['department' => new Department()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param DepartmentPostRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(DepartmentPostRequest $request): RedirectResponse
     {
-        $data = $this->validate($request, [
-            'name' => 'required|unique:departments'
-        ]);
-
-        $department = new Department();
-        $department->fill($data);
-
-        $department->save();
+        $this->departmentsRepository->save(new Department(), $request->all());
 
         return redirect()
             ->route('home');
@@ -105,20 +84,13 @@ class DepartmentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param DepartmentPostRequest $request
      * @param Department $department
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function update(Request $request, Department $department): RedirectResponse
+    public function update(DepartmentPostRequest $request, Department $department): RedirectResponse
     {
-        $data = $this->validate($request, [
-            'name' => 'required|unique:departments'
-        ]);
-
-        $department->fill($data);
-
-        $department->save();
+        $this->departmentsRepository->save($department, $request->all());
 
         return redirect()
             ->route('home');
@@ -133,9 +105,8 @@ class DepartmentsController extends Controller
     public function destroy(Department $department): RedirectResponse
     {
         if ($department && $department->staff()->count() == 0) {
-            $department->delete();
+            $this->departmentsRepository->delete($department);
         }
-
         return redirect()
             ->route('home');
     }

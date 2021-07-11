@@ -15,7 +15,7 @@
 {{ Form::label('patronymic', 'patronymic') }}
 {{ Form::text('patronymic') }}<br>
 {{ Form::label('gender', 'gender') }}
-{{ Form::select('gender', array('M' => 'Male', 'F' => 'Flame')) }}<br>
+{{ Form::select('gender', array('M' => 'Male', 'F' => 'Female')) }}<br>
 {{ Form::label('wage', 'wage') }}
 {{ Form::number('wage') }}<br>
 
@@ -35,11 +35,6 @@
         {{ Form::label('department_id', $department->name) }}
         {{ Form::checkbox('department_id[]', $department->id)}}<br>
     @endforeach
-{{--    @foreach($departments as $department)--}}
-{{--        @continue(in_array($staff->$departments, $department))--}}
-{{--        {{ Form::label('department_id', $department->name) }}--}}
-{{--        {{ Form::checkbox('department_id[]', $department->id)}}<br>--}}
-{{--    @endforeach--}}
 @else
     @foreach($departments as $department)
         {{ Form::label('department_id', $department->name) }}
