@@ -1,5 +1,10 @@
 start:
-	php artisan serve --host 0.0.0.0
+	docker-compose up -d
+	php artisan serve --host 0.0.0.0 --port 8000
+
+stop:
+	docker-compose stop
+	sudo kill -9 `sudo lsof -t -i:9001`
 
 setup:
 	composer install

@@ -9,9 +9,16 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as Col;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class DepartmentsRepository
+ * @package App\Repositories
+ */
 class DepartmentsRepository implements DepartmentsRepositoryInterface
 {
 
+    /**
+     * @return Collection
+     */
     public function all(): Collection
     {
         foreach (Department::all() as $item) {
@@ -24,6 +31,10 @@ class DepartmentsRepository implements DepartmentsRepositoryInterface
         return Department::all();
     }
 
+    /**
+     * @param int $departmentId
+     * @return int
+     */
     public function findNumberOfEmployeesDepartments(int $departmentId): int
     {
         return DB::table('departments')
@@ -33,6 +44,11 @@ class DepartmentsRepository implements DepartmentsRepositoryInterface
             ->count();
     }
 
+    /**
+     * @param Department $department
+     * @param array $data
+     * @return Department
+     */
     public function save(Department $department, array $data): Department
     {
         $department->fill($data);
@@ -40,18 +56,29 @@ class DepartmentsRepository implements DepartmentsRepositoryInterface
         return $department;
     }
 
+    /**
+     * @param Department $department
+     */
     public function delete(Department $department): void
     {
         $department->delete();
     }
 
-    public function remainingDepartments($departmentId): Col
+    /**
+     * @param array|int $departmentId
+     * @return Col
+     */
+    public function remainingDepartments(array|int $departmentId): Col
     {
         return DB::table('departments')
             ->whereNotIn('id', $departmentId)
             ->get();
     }
 
+    /**
+     * @param int $departmentId
+     * @return int
+     */
     public function maxWageStaff(int $departmentId): int
     {
         return DB::table('staff')
@@ -61,6 +88,10 @@ class DepartmentsRepository implements DepartmentsRepositoryInterface
             ->max('staff.wage') ?? 0;
     }
 
+    /**
+     * @param Department $department
+     * @param int $staffId
+     */
     public function saveStaff(Department $department, int $staffId): void
     {
         $department->staff()->attach($staffId);
