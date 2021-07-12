@@ -15,9 +15,8 @@ class StaffRepository implements StaffRepositoryInterface
         return Staff::all();
     }
 
-    public function save(array $data): Staff
+    public function save(Staff $staff, array $data): Staff
     {
-        $staff = new Staff();
         $staff->fill($data);
         $staff->save();
         return $staff;

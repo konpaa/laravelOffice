@@ -10,7 +10,7 @@ use Illuminate\Support\Collection as Col;
 interface StaffRepositoryInterface
 {
     public function all(): Collection;
-    public function save(array $data): Staff;
+    public function save(Staff $staff, array $data): Staff;
     public function saveDepartment(Staff $staff, int $idDepartment): Staff;
     public function removeDepartment(Staff $staff, int $idDepartment): Staff;
     public function getIdDepartmentsInWhichHeWorks(int $idStaff): Col;

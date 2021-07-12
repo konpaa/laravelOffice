@@ -80,7 +80,7 @@ class StaffController extends Controller
     {
         $this->saveObjectServices->saveDepartmentsInStaff(
             $request->input('department_id'),
-            $this->staffRepository->save($request->all())
+            $this->staffRepository->save(new Staff(), $request->all())
         );
 
         return redirect()
@@ -121,11 +121,11 @@ class StaffController extends Controller
      */
     public function update(StaffPostRequest $request, Staff $staff): RedirectResponse
     {
-        $this->staffRepository->save($request->all());
+        $newStaff = $this->staffRepository->save($staff, $request->all());
 
-        $this->saveObjectServices->saveNewDepartmentsInStaff($request->input('department_id'), $staff);
+        $this->saveObjectServices->saveNewDepartmentsInStaff($request->input('department_id'), $newStaff);
 
-        $this->saveObjectServices->saveRemainingDepartments($request->input('department_id'), $staff);
+        $this->saveObjectServices->saveRemainingDepartments($request->input('department_id'), $newStaff);
 
         return redirect()
             ->route('home');
