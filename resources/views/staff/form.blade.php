@@ -1,13 +1,3 @@
-
-@if ($errors->any())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 {{ Form::label('firstName', 'firstName') }}
 {{ Form::text('firstName') }}<br>
 {{ Form::label('lastName', 'lastName') }}
