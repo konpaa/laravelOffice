@@ -1,6 +1,6 @@
 ## Install
 ```
-git clone https://github.com/ini1990/php-project-lvl4.git
+git clone https://github.com/konpaa/laravelOffice.git
 ```
 
 ### Setup
