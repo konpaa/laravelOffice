@@ -20,17 +20,3 @@ services:
       POSTGRES_DB: test
     ports:
       - 5435:5434
-
-  selenium:
-    image: selenium/standalone-chrome
-    ports:
-      - "4444:4444"
-  lamp:
-    build: ./lamp
-    ports:
-      - "3306:3306"
-      - "90:90"
-    volumes:
-      - /office_data:/var/www/html
-    links:
-      - selenium
