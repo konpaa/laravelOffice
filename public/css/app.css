@@ -10004,6 +10004,7 @@ h3 {
 }
 .mark {
   color: green;
+  background-color: transparent;
 }
 
 form {

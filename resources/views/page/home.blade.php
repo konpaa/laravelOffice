@@ -1,15 +1,14 @@
 @extends('layouts.app')
-
 @section('title')
     home
 @endsection
 @section('content')
-<table class="table">
+<table class="table table-bordered">
     <thead>
     <tr>
-        <th class="col">Staff</th>
+        <th scope="col">Staff</th>
         @foreach ($departments as $department)
-            <th class="col">{{$department->name}}</th>
+            <th scope="col">{{$department->name}}</th>
         @endforeach
     </tr>
     </thead>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Office-@yield('title')</title>
+    <title>@yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -11,6 +11,8 @@
 </head>
 <body>
 @include('layouts.navbar')
+@include('layouts.flash')
+@include('layouts.error')
 <div class="container mt-4">
     <h1>@yield('header')</h1>
     <div class="content">

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentPostRequest;
 use App\Models\Department;
 use App\Repositories\Interfaces\DepartmentsRepositoryInterface;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -28,7 +26,7 @@ class DepartmentsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
     public function index(): View
     {
@@ -38,7 +36,7 @@ class DepartmentsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|View
+     * @return View
      */
     public function create(): View
     {
@@ -56,14 +54,14 @@ class DepartmentsController extends Controller
         $this->departmentsRepository->save(new Department(), $request->all());
 
         return redirect()
-            ->route('home');
+            ->route('home')->with('success', 'Created success');
     }
 
     /**
      * Display the specified resource.
      *
      * @param Department $department
-     * @return Application|Factory|View
+     * @return View
      */
     public function show(Department $department): View
     {
@@ -74,7 +72,7 @@ class DepartmentsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Department $department
-     * @return Application|Factory|View
+     * @return View
      */
     public function edit(Department $department): View
     {
@@ -93,7 +91,7 @@ class DepartmentsController extends Controller
         $this->departmentsRepository->save($department, $request->all());
 
         return redirect()
-            ->route('home');
+            ->route('home')->with('success', 'Update success');
     }
 
     /**
@@ -106,8 +104,11 @@ class DepartmentsController extends Controller
     {
         if ($department && $department->staff()->count() == 0) {
             $this->departmentsRepository->delete($department);
+            return redirect()
+                ->route('home')->with('success', 'Deleted success');
         }
+
         return redirect()
-            ->route('home');
+            ->route('home')->with('warning', 'Department have staff!');
     }
 }

@@ -84,7 +84,7 @@ class StaffController extends Controller
         );
 
         return redirect()
-            ->route('home');
+            ->route('home')->with('success', 'Created success');
     }
 
     /**
@@ -128,7 +128,7 @@ class StaffController extends Controller
         $this->saveObjectServices->saveRemainingDepartments($request->input('department_id'), $staff);
 
         return redirect()
-            ->route('home');
+            ->route('home')->with('success', 'Updated success');
     }
 
     /**
@@ -142,7 +142,8 @@ class StaffController extends Controller
         if ($staff) {
             $this->staffRepository->destroy($staff);
         }
+
         return redirect()
-            ->route('home');
+            ->route('home')->with('success', 'Deleted success');
     }
 }

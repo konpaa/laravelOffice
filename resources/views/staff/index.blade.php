@@ -4,15 +4,15 @@
 @endsection
 @section('content')
 
-<table class="table">
+<table class="table table-borderless">
 <thead>
 <tr>
-    <th class="col">FirstName</th>
-    <th class="col">SurName</th>
-    <th class="col">Patronymic</th>
-    <th class="col">Gender</th>
-    <th class="col">Wage</th>
-{{--    <th class="col">Departments</th>--}}
+    <th scope="col">FirstName</th>
+    <th scope="col">SurName</th>
+    <th scope="col">Patronymic</th>
+    <th scope="col">Gender</th>
+    <th scope="col">Wage</th>
+    <th scope="col">Departments</th>
 </tr>
 </thead>
     <tbody>
@@ -22,11 +22,9 @@
         <th scope="row">{{$person->patronymic}}</th>
         <th scope="row">{{$person->gender}}</th>
         <th scope="row">{{$person->wage}}</th>
-{{--        <th scope="row">--}}
-{{--        @foreach($person->departments as $department)--}}
-{{--        {{$department->name}}--}}
-{{--        @endforeach--}}
-{{--        </th>--}}
+        <th scope="row">
+            {{$person->departments()->pluck('name')->implode(', ')}}
+        </th>
         <th>
             <a href="{{route('staff.edit', $person)}}">Update</a>
         </th>
